@@ -16,9 +16,8 @@ font-family:"courier", monospace;
 
 }
 canvas {
-  magin:auto ;
-  top:0;
-  left:0;
+  display:block;
+  magin:150px auto;
   position:absolute;
   z-index: -1
 }
