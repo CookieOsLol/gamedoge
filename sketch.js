@@ -3,22 +3,29 @@
 let state = 'title';
 let cnv;
 let points = 0;
-
+let w = 600;
+let h = 600;
+let player;
 
 function setup(){
-cnv = createCanvas(600,600);
+cnv = createCanvas(w,h);
+
+textFont('monospace');
+
+player = new Player();
+
 
 }
 
 function draw(){
 
 switch (state){
-  case'title':
+  case 'title':
   title();
   cnv.mouseClicked(titleMouseClicked);
   break;
 
-  case 'level1':
+  case 'level 1':
   level1();
   cnv.mouseClicked(level1MouseClicked);
   break;
@@ -28,8 +35,7 @@ youWin();
 cnv.mouseClicked(youWinMouseClicked);
 break;
 
-
-  default;
+  default:
   break;
 }
 
@@ -44,13 +50,14 @@ break;
 }
 
 function title(){
-  background(100);
+  background(0);
   textSize(80);
-  stroke(25);
-  text('MY Game',100,100);
+  fill(255);
+  textAlign(CENTER);
+  text('MY Game',w/2,h/5);
 
 textSize(30);
-  text('click anywhere to start',100,300);
+  text('click anywhere to start',w/2,h/2);
 }
 
 function titleMouseClicked(){
@@ -60,7 +67,7 @@ console.log('canvas is clicked')
 
 function level1(){
 background(50,150,200);
-text('click for points',0,height -30);
+text('click for points',w/2,h - 50);
 }
 
 
@@ -80,10 +87,10 @@ function youWin(){
 background(100);
 textSize(80);
 stroke(255);
-text('You win!',100,100);
+text('You win!',w/2,h/2);
 
 textSize(30);
-text('click anywhere to restart',100,300)
+text('click anywhere to restart',w/2,h * 3/4)
 
 
 }

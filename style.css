@@ -1,23 +1,9 @@
-html{
+html, body {
   margin: 0;
   padding: 0;
 }
 
-h1 {
-  letter-spacing: 15px;
-}
-
-body {
-magin :100px auto 0 auto;
-width : 80%
-text-align : center;
-font-family:"courier", monospace;
-
-
-}
 canvas {
-  display:block;
-  magin:150px auto;
-  position:absolute;
-  z-index: -1
+  display: block;
+  margin: 100px auto;
 }
