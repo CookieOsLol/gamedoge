@@ -165,7 +165,7 @@ function title(){
   image(playImg,300,470,300,300);
 
 textSize(30);
-  text('click anywhere to start',w/2,h/2);
+  text('click anywhere to start',8000,8000);
 }
 
 function titleMouseClicked(){
