@@ -1,7 +1,7 @@
 class Token{
 constructor(){
 
-  this.r = 50;
+  this.r = 150;
 this.x = random(w);
 this.y = 0 - this.r;
 this.speed = 7;

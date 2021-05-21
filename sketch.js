@@ -2,7 +2,8 @@
 
 let state = 'title';
 let cnv;
-let points = 0;
+let points = 1;
+let lives  = 3;
 let w = 600;
 let h = 600;
 let player;
@@ -15,6 +16,15 @@ let enemyImg;
 let titleImg;
 let playImg;
 
+let playerSS;
+let enemySS;
+let playerJSON;
+let enemyJSON;
+
+let playerAnimation = [];
+let enemyAnimation = [];
+
+
 function preload(){
 titleImg = loadImage('assets/title.png');
 playerImg = loadImage('assets/doge.png');
@@ -22,6 +32,11 @@ tokenImg = loadImage('assets/token.png');
 enemyImg = loadImage('assets/enemy.png');
 playImg = loadImage('assets/play.png');
 
+//playerSS = loadImage('assets/dogeSS.png');
+//playerJSON = loadJSON('assets/dogeSS.json');
+
+//enemySS = loadImage('assets/EnemySS.png');
+//enemyJSON = loadJSON('assets/EnemySS.json');
 }
 
 function setup(){
@@ -33,6 +48,17 @@ imageMode(CENTER);
 rectMode(CENTER);
 
 textFont('monospace');
+
+//let playerFrames = playerJSON.frames;
+
+//for (let i = 0; i < playerFrames.length; i++){
+//let pos = playerFrames[i].frame;
+//let img = playerSS.get(pos.x,pos.y,pos.w,pos.h);
+//  playerAnimation.push(img);
+//  console.log(playerAnimation);
+//}
+
+
 
 player = new Player();
 tokens.push(new Token());
@@ -68,6 +94,12 @@ case 'you win':
 youWin();
 cnv.mouseClicked(youWinMouseClicked);
   break;
+
+  case 'gameover':
+  gameover();
+  cnv.mouseClicked(gameoverMouseClicked);
+    break;
+
 default:
   break;
 }
@@ -147,7 +179,7 @@ if (random(1) <= 0.04){
 tokens.push(new Token());
 }
 
-if (random(1) <= 0.06){
+if (random(1) <= 0.001){
 enemies.push(new Enemy());
 
 }
@@ -172,7 +204,7 @@ for (let i = 0; i < tokens.length; i++){
 
 for (let i = tokens.length - 1; i >= 0; i-- ){
 
-if (dist(player.x,player.y,tokens[i].x,tokens[i].y)<= (player.r + tokens[i].r)/2){
+if (dist(player.x,player.y,tokens[i].x,tokens[i].y)<= (player.r + tokens[i].r)/4){
 points++;
 
 console.log(points);
@@ -188,7 +220,7 @@ tokens.splice(i,1);
 
 for (let i = enemies.length - 1; i >= 0; i-- ){
 
-if (dist(player.x,player.y,enemies[i].x,enemies[i].y) <= (player.r + enemies[i].r)/2){
+if (dist(player.x,player.y,enemies[i].x,enemies[i].y) <= (player.r + enemies[i].r)/4){
 points--;
 
 enemies.splice(i,1);
@@ -199,7 +231,15 @@ enemies.splice(i,1);
 }
 
 }
-text(`points : ${points}`, w/4, h-30);
+textSize(20);
+text(`points : ${points}`, w/30, h-10);
+
+if(points >= 4){
+  state = 'level 2';
+} else if (points <= 0){
+
+  state = 'gameover';
+}
 
 
 }
@@ -214,10 +254,166 @@ function level1MouseClicked(){
 
 }
 
+function level2(){
+  background(100,10,200);
+  //text('click for points',w/2,h - 50);
+  textSize(50);
+text('Level 2!',40,40);
+  if (random(1) <= 0.01){
+  tokens.push(new Token());
+  }
+
+  if (random(1) <= 0.04){
+  enemies.push(new Enemy());
+
+  }
+
+
+
+  player.display();
+  player.move();
+
+  for (let i = 0; i < enemies.length; i++){
+    enemies[i].display();
+    enemies[i].move();
+  }
+
+  for (let i = 0; i < tokens.length; i++){
+    tokens[i].display();
+    tokens[i].move();
+
+  }
+
+  //check for collision, if there is a collision increase points by 1
+
+  for (let i = tokens.length - 1; i >= 0; i-- ){
+
+  if (dist(player.x,player.y,tokens[i].x,tokens[i].y)<= (player.r + tokens[i].r)/4){
+  points++;
+
+  console.log(points);
+  tokens.splice(i,1);
+
+  } else if (tokens[i].y > h){
+    tokens.splice(i,1);
+
+  }
+  }
+
+
+
+  for (let i = enemies.length - 1; i >= 0; i-- ){
+
+  if (dist(player.x,player.y,enemies[i].x,enemies[i].y) <= (player.r + enemies[i].r)/4){
+  points = points - 5;
+
+  enemies.splice(i,1);
+
+  } else if (enemies[i].y > h){
+    enemies.splice(i,1);
+
+  }
+
+  }
+  textSize(20);
+  text(`points : ${points}`, w/30, h-10);
+
+  if(points >= 10){
+    state = 'level 3';
+  } else if (points <= 0){
+
+    state = 'gameover';
+  }
+
+
+}
+function level2MouseClicked(){
+
+
+}
+
+function level3(){
+  background(200,10,200);
+  //text('click for points',w/2,h - 50);
+  textSize(50);
+text('Level 3!',40,40);
+  if (random(1) <= 0.01){
+  tokens.push(new Token());
+  }
+
+  if (random(1) <= 0.04){
+  enemies.push(new Enemy());
+
+  }
+
+
+
+  player.display();
+  player.move();
+
+  for (let i = 0; i < enemies.length; i++){
+    enemies[i].display();
+    enemies[i].move();
+  }
+
+  for (let i = 0; i < tokens.length; i++){
+    tokens[i].display();
+    tokens[i].move();
+
+  }
+
+  //check for collision, if there is a collision increase points by 1
+
+  for (let i = tokens.length - 1; i >= 0; i-- ){
+
+  if (dist(player.x,player.y,tokens[i].x,tokens[i].y)<= (player.r + tokens[i].r)/4){
+  points++;
+
+  console.log(points);
+  tokens.splice(i,1);
+
+  } else if (tokens[i].y > h){
+    tokens.splice(i,1);
+
+  }
+  }
+
+
+
+  for (let i = enemies.length - 1; i >= 0; i-- ){
+
+  if (dist(player.x,player.y,enemies[i].x,enemies[i].y) <= (player.r + enemies[i].r)/4){
+  points = points - 5;
+
+  enemies.splice(i,1);
+
+  } else if (enemies[i].y > h){
+    enemies.splice(i,1);
+
+  }
+
+  }
+  textSize(20);
+  text(`points : ${points}`, w/30, h-10);
+
+  if(points >= 15){
+    state = 'you win';
+  } else if (points <= 0){
+
+    state = 'gameover';
+  }
+
+
+}
+
+
+
+function level3MouseClicked(){
+}
 
 
 function youWin(){
-background(100);
+background(0,151,233);
 textSize(80);
 stroke(255);
 text('You win!',w/2,h/2);
@@ -229,8 +425,44 @@ text('click anywhere to restart',w/2,h * 3/4)
 }
 
 
-function youWinMouseClicked(){
-state = 'level 1';
-points = 0;
 
+
+function youWinMouseClicked(){
+state = 'title';
+points = 1;
+
+}
+
+
+function gameover(){
+  background(100);
+
+  if (lives >= 0){
+
+    text(`${lives} tries left`, w/2, h/2);
+    textSize(30);
+    text('try again',w/2,h * 3/4)
+
+} else {
+text('Game Over', w / 2 , h / 2);
+  textSize(30);
+  text('click anywhere to restart',w/2,h * 3/4)
+
+}
+
+
+}
+
+
+
+
+function gameoverMouseClicked(){
+
+  if (lives >= 0){
+state = 'level 1';
+lives--
+} else {
+  state ='title';
+}
+points = 1;
 }

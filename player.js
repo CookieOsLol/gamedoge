@@ -2,10 +2,10 @@ class Player{
 
 constructor(){
 
-this.r = 60;
+this.r = 150;
 this.x = w / 2;
 this.y = h - this.r;
-this.speed = 2;
+this.speed = 8;
 this.direction = 'still';
 
 
