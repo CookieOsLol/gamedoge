@@ -17,13 +17,13 @@ let titleImg;
 let playImg;
 let bgImg;
 
-let playerSS;
-let enemySS;
-let playerJSON;
-let enemyJSON;
+//let playerSS;
+//let enemySS;
+//let playerJSON;
+//let enemyJSON;
 
-let playerAnimation = [];
-let enemyAnimation = [];
+//let playerAnimation = [];
+//let enemyAnimation = [];
 
 
 function preload(){
