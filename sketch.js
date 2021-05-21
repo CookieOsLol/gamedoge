@@ -7,24 +7,34 @@ let w = 600;
 let h = 600;
 let player;
 let tokens = [];
+let enemies = [];
 
 let playerImg;
 let tokenImg;
-
+let enemyImg;
+let titleImg;
 
 function preload(){
+titleImg = loadImage('assets/title.png');
 playerImg = loadImage('assets/doge.png');
 tokenImg = loadImage('assets/token.png');
-
+enemyImg = loadImage('assets/enemy.png');
 }
 
 function setup(){
 cnv = createCanvas(w,h);
+frameRate(60);
+
+imageMode(CENTER);
+
+rectMode(CENTER);
 
 textFont('monospace');
 
 player = new Player();
 tokens.push(new Token());
+enemies.push(new Enemy());
+
 
 }
 
@@ -40,6 +50,17 @@ switch (state){
   level1();
   cnv.mouseClicked(level1MouseClicked);
   break;
+
+  case 'level 2':
+  level2();
+  cnv.mouseClicked(level2MouseClicked);
+  break;
+
+  case 'level 3':
+  level3();
+  cnv.mouseClicked(level3MouseClicked);
+  break;
+
 case 'you win':
 youWin();
 cnv.mouseClicked(youWinMouseClicked);
@@ -76,12 +97,34 @@ player.direction = 'right'
 
 }
 
+function keyReleased(){
+
+let numberKeysPressed = 0;
+
+if (keyIsDown(LEFT_ARROW)){
+  numberKeysPressed++;
+}
+if (keyIsDown(RIGHT_ARROW)){
+  numberKeysPressed++;
+}if (keyIsDown(DOWN_ARROW)){
+  numberKeysPressed++;
+}if (keyIsDown(UP_ARROW)){
+  numberKeysPressed++;
+}
+
+
+
+if (numberKeysPressed == 0){
+  player.direction = 'still';
+}
+
+}
+
+
 function title(){
-  background(0);
-  textSize(80);
-  fill(255);
-  textAlign(CENTER);
-  text('MY Game',w/2,h/5);
+  image(titleImg,300,300,600,600);
+//  textAlign(CENTER);
+  //text('MY Game',w/2,h/5);
 
 textSize(30);
   text('click anywhere to start',w/2,h/2);
@@ -96,8 +139,12 @@ function level1(){
 background(50,150,200);
 //text('click for points',w/2,h - 50);
 
-if (random(1) <= 0.01){
+if (random(1) <= 0.04){
 tokens.push(new Token());
+}
+
+if (random(1) <= 0.06){
+enemies.push(new Enemy());
 
 }
 
@@ -106,7 +153,10 @@ tokens.push(new Token());
 player.display();
 player.move();
 
-
+for (let i = 0; i < enemies.length; i++){
+  enemies[i].display();
+  enemies[i].move();
+}
 
 for (let i = 0; i < tokens.length; i++){
   tokens[i].display();
@@ -127,14 +177,28 @@ tokens.splice(i,1);
 } else if (tokens[i].y > h){
   tokens.splice(i,1);
 
+}
+}
+
+
+
+for (let i = enemies.length - 1; i >= 0; i-- ){
+
+if (dist(player.x,player.y,enemies[i].x,enemies[i].y) <= (player.r + enemies[i].r)/2){
+points--;
+
+enemies.splice(i,1);
+
+} else if (enemies[i].y > h){
+  enemies.splice(i,1);
 
 }
 
 }
 text(`points : ${points}`, w/4, h-30);
 
-}
 
+}
 
 function level1MouseClicked(){
 //points ++ ;
@@ -164,6 +228,5 @@ text('click anywhere to restart',w/2,h * 3/4)
 function youWinMouseClicked(){
 state = 'level 1';
 points = 0;
-
 
 }
