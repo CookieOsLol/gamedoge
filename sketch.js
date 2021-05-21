@@ -164,8 +164,8 @@ function title(){
   //text('MY Game',w/2,h/5);
   image(playImg,300,470,300,300);
 
-//textSize(30);
-  //text('click anywhere to start',w/2,h/2);
+textSize(30);
+  text('click anywhere to start',w/2,h/2);
 }
 
 function titleMouseClicked(){
