@@ -6,7 +6,7 @@ let points = 0;
 let w = 600;
 let h = 600;
 let player;
-let token;
+let tokens = [];
 
 
 function setup(){
@@ -15,7 +15,7 @@ cnv = createCanvas(w,h);
 textFont('monospace');
 
 player = new Player();
-token = new Token();
+tokens.push(new Token());
 
 }
 
@@ -31,13 +31,11 @@ switch (state){
   level1();
   cnv.mouseClicked(level1MouseClicked);
   break;
-
-case 'you win' :
+case 'you win':
 youWin();
 cnv.mouseClicked(youWinMouseClicked);
-break;
-
-  default:
+  break;
+default:
   break;
 }
 
@@ -52,7 +50,8 @@ break;
 }
 
 function keyPressed(){
-if (key == 'LEFT_ARROW'){
+
+if (keyCode == LEFT_ARROW){
 player.direction = 'left'
 } else if (keyCode == RIGHT_ARROW) {
 player.direction = 'right'
@@ -90,19 +89,29 @@ background(50,150,200);
 
 player.display();
 player.move();
-token.display();
-token.move();
+
+tokens[0].display();
+tokens[0].move();
+
+//check for collision, if there is a collision increase points by 1
+if (dist(player.x,player.y,tokens[0].x,tokens[0].y)<= (player.r + tokens[0].r)/2){
+points++;
+console.log(points);
+
+
+}
+text(`points : ${points}`, w/4, h-30);
 
 }
 
 
 function level1MouseClicked(){
-points ++ ;
-console.log('points = ' + points);
+//points ++ ;
+//console.log('points = ' + points);
 
-if (points >= 10){
-  state = 'you win';
-}
+//if (points >= 10){
+  //state = 'you win';
+//}
 
 }
 

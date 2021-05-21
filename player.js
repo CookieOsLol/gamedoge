@@ -33,7 +33,7 @@ case 'right':
 //increase x pos
 this.x += this.speed;
 break;
-case: 'left':
+case 'left':
 //decrease x pos
 this.x -= this.speed
 break;
