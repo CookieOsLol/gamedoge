@@ -27,11 +27,11 @@ let bgImg;
 
 
 function preload(){
-titleImg = loadImage('assets/title.png');
+titleImg = loadImage('assets/Title.png');
 playerImg = loadImage('assets/doge.png');
 tokenImg = loadImage('assets/token.png');
 enemyImg = loadImage('assets/enemy.png');
-playImg = loadImage('assets/play.png');
+playImg = loadImage('assets/Play.png');
 bgImg = loadImage('assets/background.png');
 
 //playerSS = loadImage('assets/dogeSS.png');
