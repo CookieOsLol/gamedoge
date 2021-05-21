@@ -87,17 +87,33 @@ function level1(){
 background(50,150,200);
 //text('click for points',w/2,h - 50);
 
+if (random(1) <= 0.01){
+tokens.push(new Token());
+
+}
+
+
+
 player.display();
 player.move();
 
-tokens[0].display();
-tokens[0].move();
+
+
+for (let i = 0; i < tokens.length; i++){
+  tokens[i].display();
+  tokens[i].move();
+
+}
 
 //check for collision, if there is a collision increase points by 1
-if (dist(player.x,player.y,tokens[0].x,tokens[0].y)<= (player.r + tokens[0].r)/2){
+
+for (let i = tokens.length - 1; i >= 0; i-- ){
+if (dist(player.x,player.y,tokens[i].x,tokens[i].y)<= (player.r + tokens[i].r)/2){
 points++;
 console.log(points);
+tokens.splice(i,1);
 
+}
 
 }
 text(`points : ${points}`, w/4, h-30);
