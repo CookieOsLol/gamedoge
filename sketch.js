@@ -15,6 +15,7 @@ let tokenImg;
 let enemyImg;
 let titleImg;
 let playImg;
+let bgImg;
 
 let playerSS;
 let enemySS;
@@ -31,6 +32,7 @@ playerImg = loadImage('assets/doge.png');
 tokenImg = loadImage('assets/token.png');
 enemyImg = loadImage('assets/enemy.png');
 playImg = loadImage('assets/play.png');
+bgImg = loadImage('assets/background.png');
 
 //playerSS = loadImage('assets/dogeSS.png');
 //playerJSON = loadJSON('assets/dogeSS.json');
@@ -259,7 +261,7 @@ function level2(){
   //text('click for points',w/2,h - 50);
   textSize(50);
 text('Level 2!',40,40);
-  if (random(1) <= 0.01){
+  if (random(1) <= 0.03){
   tokens.push(new Token());
   }
 
@@ -337,11 +339,11 @@ function level3(){
   //text('click for points',w/2,h - 50);
   textSize(50);
 text('Level 3!',40,40);
-  if (random(1) <= 0.01){
+  if (random(1) <= 0.03){
   tokens.push(new Token());
   }
 
-  if (random(1) <= 0.04){
+  if (random(1) <= 0.07){
   enemies.push(new Enemy());
 
   }
@@ -413,13 +415,13 @@ function level3MouseClicked(){
 
 
 function youWin(){
-background(0,151,233);
+image(bgImg,300,300,600,600);
 textSize(80);
 stroke(255);
-text('You win!',w/2,h/2);
+text('You win!',w/7,h/7);
 
 textSize(30);
-text('click anywhere to restart',w/2,h * 3/4)
+text('click anywhere to restart',w/7,h /2)
 
 
 }
