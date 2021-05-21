@@ -13,12 +13,15 @@ let playerImg;
 let tokenImg;
 let enemyImg;
 let titleImg;
+let playImg;
 
 function preload(){
 titleImg = loadImage('assets/title.png');
 playerImg = loadImage('assets/doge.png');
 tokenImg = loadImage('assets/token.png');
 enemyImg = loadImage('assets/enemy.png');
+playImg = loadImage('assets/play.png');
+
 }
 
 function setup(){
@@ -125,9 +128,10 @@ function title(){
   image(titleImg,300,300,600,600);
 //  textAlign(CENTER);
   //text('MY Game',w/2,h/5);
+  image(playImg,300,470,300,300);
 
-textSize(30);
-  text('click anywhere to start',w/2,h/2);
+//textSize(30);
+  //text('click anywhere to start',w/2,h/2);
 }
 
 function titleMouseClicked(){

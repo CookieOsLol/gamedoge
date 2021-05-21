@@ -1,9 +1,23 @@
 html, body {
   margin: 0;
   padding: 0;
+  background-color:black;
+}
+
+h1{
+text-align: center;
+color:cyan;
+}
+
+p {
+text-align: center;
+color: cyan;
 }
 
 canvas {
+  margin: auto;
   display: block;
-  margin: 50px auto;
+  padding:30px;
+  boder-color:cyan;
+  border-style: groove;
 }
