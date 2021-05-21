@@ -8,6 +8,15 @@ let h = 600;
 let player;
 let tokens = [];
 
+let playerImg;
+let tokenImg;
+
+
+function preload(){
+playerImg = loadImage('assets/doge.png');
+tokenImg = loadImage('assets/token.png');
+
+}
 
 function setup(){
 cnv = createCanvas(w,h);
@@ -108,10 +117,16 @@ for (let i = 0; i < tokens.length; i++){
 //check for collision, if there is a collision increase points by 1
 
 for (let i = tokens.length - 1; i >= 0; i-- ){
+
 if (dist(player.x,player.y,tokens[i].x,tokens[i].y)<= (player.r + tokens[i].r)/2){
 points++;
+
 console.log(points);
 tokens.splice(i,1);
+
+} else if (tokens[i].y > h){
+  tokens.splice(i,1);
+
 
 }
 
